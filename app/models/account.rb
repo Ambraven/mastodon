@@ -195,6 +195,7 @@ class Account < ApplicationRecord
           AND target_account_id NOT IN (SELECT * FROM first_degree)
           AND target_account_id NOT IN (:excluded_account_ids)
           AND accounts.suspended = false
+          AND accounts.locked = false
         GROUP BY target_account_id, accounts.id
         ORDER BY count(account_id) DESC
         OFFSET :offset
